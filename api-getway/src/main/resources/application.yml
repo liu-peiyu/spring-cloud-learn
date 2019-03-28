@@ -1,0 +1,36 @@
+server:
+  port: 4001
+
+spring:
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1001/eureka,http://localhost:1002/eureka
+  instance:
+    prefer-ip-address: true
+
+zuul:
+  ignored-services: '*'
+  routes:
+    user-service:
+      path: /v1/**
+      serviceId: user-serivce
+      customSensitiveHeaders: true
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timout-in-milliseconds: 3000

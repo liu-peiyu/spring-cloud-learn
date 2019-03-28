@@ -1,0 +1,25 @@
+server:
+  port: 3001
+
+spring:
+  application:
+    name: ribbon-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1001/eureka,http://localhost:1002/eureka
+user-service:
+  ribbon:
+    ConnectTimeout: 1000
+    ReadTimeout: 3000
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+hystrix:
+  command:
+    execution:
+      isolation:
+        thread:
+          timeoutInMilliseconds: 2000
+
+
